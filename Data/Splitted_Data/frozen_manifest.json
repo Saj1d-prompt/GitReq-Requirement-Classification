@@ -1,0 +1,27 @@
+{
+    "status": "FROZEN",
+    "dataset": "GitReq_Research_Cleaned.csv",
+    "dataset_sha256": "117e2438897c12cec3cd9aa144359bdf0a72950ef57caeb40eb83866d6f9cd6e",
+    "split_method": "StratifiedGroupKFold",
+    "selection": "Predefined class and size balance",
+    "outer_fold": 0,
+    "inner_fold": 6,
+    "outer_seed": 42,
+    "inner_seed": 43,
+    "requirements": 6300,
+    "class_count": 8,
+    "partition_sizes": {
+        "train": 4384,
+        "validation": 617,
+        "test": 1299
+    },
+    "partition_sha256": {
+        "train": "bb58b812b97213a962ac20b4003dd7ad171ec1ffcf9b80e6b66e90947a342a24",
+        "validation": "dabcf427dcd13f1845afabe9f1b99480b525ec19308d1a464964782daa6f370e",
+        "test": "1e2f8d6fecbba440803bcf15c16e616152f2dd96c69b4324bdaf76169b2b8478"
+    },
+    "test_assignments_unchanged": true,
+    "repository_overlap": 0,
+    "issue_overlap": 0,
+    "model_performance_used_in_selection": false
+}
