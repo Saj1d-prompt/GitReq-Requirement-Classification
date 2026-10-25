@@ -1,0 +1,44 @@
+{
+  "activation": "gelu",
+  "architectures": [
+    "DistilBertForSequenceClassification"
+  ],
+  "attention_dropout": 0.1,
+  "dim": 768,
+  "dropout": 0.1,
+  "dtype": "float32",
+  "hidden_dim": 3072,
+  "id2label": {
+    "0": "Availability",
+    "1": "Fault-tolerance",
+    "2": "Functional",
+    "3": "Maintainability",
+    "4": "Performance",
+    "5": "Portability",
+    "6": "Scalability",
+    "7": "Security"
+  },
+  "initializer_range": 0.02,
+  "label2id": {
+    "Availability": 0,
+    "Fault-tolerance": 1,
+    "Functional": 2,
+    "Maintainability": 3,
+    "Performance": 4,
+    "Portability": 5,
+    "Scalability": 6,
+    "Security": 7
+  },
+  "max_position_embeddings": 512,
+  "model_type": "distilbert",
+  "n_heads": 12,
+  "n_layers": 6,
+  "pad_token_id": 0,
+  "problem_type": "single_label_classification",
+  "qa_dropout": 0.1,
+  "seq_classif_dropout": 0.2,
+  "sinusoidal_pos_embds": false,
+  "tie_weights_": true,
+  "transformers_version": "4.57.6",
+  "vocab_size": 30522
+}
