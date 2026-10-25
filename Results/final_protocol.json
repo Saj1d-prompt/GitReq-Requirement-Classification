@@ -1,0 +1,139 @@
+{
+    "project": "GitReq Requirements Classification",
+    "status": "FROZEN_BEFORE_TEST",
+    "primary_metric": "macro_f1",
+    "secondary_metrics": [
+        "accuracy",
+        "weighted_f1",
+        "balanced_accuracy",
+        "macro_precision",
+        "macro_recall",
+        "per_class_precision",
+        "per_class_recall",
+        "per_class_f1",
+        "confusion_matrix"
+    ],
+    "dataset": {
+        "total_requirements": 6300,
+        "training": 4384,
+        "validation": 617,
+        "test": 1299,
+        "split_method": "repository_disjoint",
+        "test_accessed_during_development": false,
+        "partition_sha256": {
+            "train": "bb58b812b97213a962ac20b4003dd7ad171ec1ffcf9b80e6b66e90947a342a24",
+            "validation": "dabcf427dcd13f1845afabe9f1b99480b525ec19308d1a464964782daa6f370e",
+            "test": "1e2f8d6fecbba440803bcf15c16e616152f2dd96c69b4324bdaf76169b2b8478"
+        }
+    },
+    "classes": [
+        "Availability",
+        "Fault-tolerance",
+        "Functional",
+        "Maintainability",
+        "Performance",
+        "Portability",
+        "Scalability",
+        "Security"
+    ],
+    "models": {
+        "dummy_majority": {
+            "path": "/content/drive/MyDrive/GitReq_Research/models/ml_baselines_v1/dummy_majority.joblib",
+            "sha256": "2c050416656caa960b6d66955ac19fdd30b9f0547677823ed3513c308e7eb9dd"
+        },
+        "tfidf_logistic_regression": {
+            "path": "/content/drive/MyDrive/GitReq_Research/models/ml_baselines_v1/tfidf_logistic_regression.joblib",
+            "sha256": "41b40c04a767502b9a8fcb55a18949eb488eb163408e3d8764a73117573cb6b1"
+        },
+        "tfidf_linear_svm": {
+            "path": "/content/drive/MyDrive/GitReq_Research/models/ml_baselines_v1/tfidf_linear_svm.joblib",
+            "sha256": "6d6fd6066fbeba90a297122baa03296fdc886e0a20f6428274faa08d8a271017"
+        },
+        "balanced_logistic_regression": {
+            "path": "/content/drive/MyDrive/GitReq_Research/models/ml_class_weight_experiment/balanced_logistic_regression.joblib",
+            "sha256": "3817fd0a2c56c459ace899f54d1e452b6d61efdba054b0b0807305527246886b"
+        },
+        "balanced_linear_svm": {
+            "path": "/content/drive/MyDrive/GitReq_Research/models/ml_class_weight_experiment/balanced_linear_svm.joblib",
+            "sha256": "12b37d737073c7a942c8b3506467b7f0fdfeb676f52b007472c0a27a6750d89e"
+        },
+        "distilbert": {
+            "path": "/content/drive/MyDrive/GitReq_Research/models/distilbert/baseline_v1",
+            "file_sha256": {
+                "model.safetensors": "ed0bbb561768d053c73976e665d1447e0ae75c07c5ddb70ca4b1d8a18b56b777",
+                "config.json": "d47ce93e66d8114a991afdaef260e00cc4e5b48de7ebe983cc8556c89b62bdca",
+                "tokenizer.json": "6928b16ab22c954c59e08e11d4d327b471376fc7f46c039ae8ec80bf2c16b133",
+                "tokenizer_config.json": "a3c9410f27554c6e26af779fd147e536c6c5f9e5cb0e6b8f38ddaa25e1b0f6af"
+            }
+        }
+    },
+    "primary_comparison": [
+        "balanced_linear_svm",
+        "distilbert"
+    ],
+    "additional_baselines": [
+        "dummy_majority",
+        "tfidf_logistic_regression",
+        "tfidf_linear_svm",
+        "balanced_logistic_regression"
+    ],
+    "distilbert": {
+        "max_length": 192,
+        "training_epochs": 4,
+        "training_seed": 42,
+        "class_weighting": null,
+        "checkpoint_selection": "maximum_validation_macro_f1"
+    },
+    "calibration": {
+        "method": "scalar_temperature",
+        "temperature": 1.0983968840598013,
+        "temperature_source": "validation_partition",
+        "calibration_file_sha256": "9be1022979c3bfb90654278fdb7c32600a5a0bc4695d3c88b83a8fa5f242dc4d",
+        "evaluate_raw_and_calibrated": true,
+        "metrics": [
+            "ECE_10",
+            "ECE_5",
+            "multiclass_brier",
+            "NLL"
+        ]
+    },
+    "selective_prediction": {
+        "thresholds": [
+            0.9,
+            0.95
+        ],
+        "report_overall_coverage": true,
+        "report_classwise_coverage": true,
+        "report_accepted_accuracy": true,
+        "report_accepted_errors": true,
+        "report_human_review_count": true
+    },
+    "uncertainty_analysis": {
+        "method": "paired_repository_bootstrap",
+        "bootstrap_repetitions": 2000,
+        "bootstrap_seed": 42,
+        "confidence_interval": "percentile_95",
+        "group_column": "repository_id",
+        "class_labels_fixed": true,
+        "zero_division": 0,
+        "report_replicates_missing_classes": true
+    },
+    "rules": {
+        "do_not_retrain_after_test": true,
+        "do_not_change_frozen_splits": true,
+        "do_not_tune_on_test": true,
+        "do_not_change_confidence_thresholds": true,
+        "do_not_change_calibration_temperature": true,
+        "report_all_prespecified_models": true,
+        "report_minority_class_performance": true,
+        "one_final_test_evaluation": true
+    },
+    "limitations": [
+        "Single frozen repository-disjoint data split.",
+        "Limited minority-class test support.",
+        "Main neural model trained with one random seed.",
+        "Validation used for model and checkpoint selection.",
+        "Calibration parameters selected using validation.",
+        "Inference benchmark is environment-specific."
+    ]
+}
